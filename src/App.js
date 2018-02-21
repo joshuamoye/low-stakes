@@ -3,7 +3,7 @@ import './App.css';
 import Main from './components/main'
 import BuyNew from'./components/BuyNew'
 import List from'./components/List'
-import footer from'./components/footer'
+//import Footer from'./components/footer'
 
 class App extends Component {
  	constructor(props){
@@ -12,7 +12,7 @@ class App extends Component {
 			wager:'',
 			account: 0,
 			stock:[
-				{ticker: "Netflix", price: 250, }
+				{ticker: "Netflix", price: [250], }
 	  		],
 		}
 			this.handleCashSubmit= this.handleCashSubmit.bind(this);
@@ -73,7 +73,10 @@ class App extends Component {
 		console.log(stock)
 		e.preventDefault()
 		var newStock = this.state.stock.map(i => {if (i.ticker==stock) {
-					i.newPrice=this.state.newPrice
+					i.price.concat({
+						price: this.state.price
+					})
+
 					return i
 				}
 				else {
@@ -82,7 +85,6 @@ class App extends Component {
 		this.setState({
 			update: "",
 			stock: newStock,
-			newPrice: 0
 		})
 	}
 
@@ -113,8 +115,6 @@ class App extends Component {
         		priceInput = {this.state.priceInput}
         		qtyInput = {this.state.qtyInput}
         		/>
-
-        <footer/>
 
       </div>
     );
