@@ -3,22 +3,22 @@ import './App.css';
 import Main from './components/main'
 import BuyNew from'./components/BuyNew'
 import List from'./components/List'
+import Nav from './components/SideNav'
+import {Grid, Row, Col} from 'react-bootstrap'
 //import Footer from'./components/footer'
 
 class App extends Component {
  	constructor(props){
 		super(props);
 		this.state= {
-			wager:'',
-			account: 0,
-			stock:[
-				{ticker: "Netflix", price: [250], }
+			portfolio:[
+				{name: "Joshua", gain: [19], }, {name: 'Nicholas', gain: [17]}
 	  		],
 		}
 			this.handleCashSubmit= this.handleCashSubmit.bind(this);
 			this.handleBuyNewSubmit= this.handleBuyNewSubmit.bind(this);
 			this.handleChange= this.handleChange.bind(this);
-			this.handleChangePrice= this.handleChangePrice.bind(this);
+			this.handleChangegain= this.handleChangegain.bind(this);
 			this.handleUpdate = this.handleUpdate.bind(this);
 	}
 
@@ -38,11 +38,11 @@ class App extends Component {
 			account:this.state.wager,
 			wager:"",
 		})
-		console.log(this.state.priceClicker)
+		console.log(this.state.gainClicker)
 	}
 
-	handleChangePrice(e,index){
-		console.log(index)
+	handleChangegain(e,index){
+		//console.log(index)
 		e.preventDefault();
 		this.setState({
 			update : index
@@ -50,31 +50,31 @@ class App extends Component {
 	}
 
 	handleBuyNewSubmit(e){
-		var newStock = this.state.stock.concat({
-			ticker:this.state.tickerInput,
-			price:this.state.priceInput,
+		var newportfolio = this.state.portfolio.concat({
+			name:this.state.nameInput,
+			gain:[this.state.gainInput],
 		})
 
-		console.log(newStock.price)
+		//console.log(newportfolio.gain)
 
-		var balance= this.state.account - this.state.priceInput
+		var balance= this.state.account - this.state.gainInput
 
 		e.preventDefault();
 		this.setState({
-			stock: newStock,
-			tickerInput: '',
-			priceInput: '',
+			portfolio: newportfolio,
+			nameInput: '',
+			gainInput: '',
 			account: balance,
 		})
 		
 	}
 
-	handleUpdate(e,stock){
-		console.log(stock)
+	handleUpdate(e,portfolio){
+		//console.log(portfolio)
 		e.preventDefault()
-		var newStock = this.state.stock.map(i => {if (i.ticker==stock) {
-					i.price.concat({
-						price: this.state.price
+		var newportfolio = this.state.portfolio.map(i => {if (i.name==portfolio) {
+					i.gain.concat({
+						gain: this.state.gain
 					})
 
 					return i
@@ -84,38 +84,55 @@ class App extends Component {
 				}})
 		this.setState({
 			update: "",
-			stock: newStock,
+			portfolio: newportfolio,
 		})
 	}
 
 
 
   render() {
+  
     return (
+
       <div	 	className="App">
 
-       <Main 	wager= {this.state.wager}
-       			account= {this.state.account}
-       			updateWager= {this.handleChange}
-       			onSubmit= {this.handleCashSubmit}
-        />
+      	<Grid>
+      		<Row>
+ 				<Col lg={1}>
+ 					<Nav/>
 
-        <List	stock = {this.state.stock}
-        		handleChange= {this.handleChange}
-        		updatePriceWasClicked= {this.state.priceClicker}
-        		changePrice = {this.handleChangePrice}
-        		update = {this.state.update}
-        		handleUpdate = {this.handleUpdate}
-        />
-       
+			    </Col>
 
-        <BuyNew onChange= {this.handleChange}
-        		updatePortfolio = {this.handleBuyNewSubmit}
-        		tickerInput = {this.state.tickerInput}
-        		priceInput = {this.state.priceInput}
-        		qtyInput = {this.state.qtyInput}
-        		/>
+			    <Col lg={9}>
 
+					<List	className = 'List'
+	        		portfolio = {this.state.portfolio}
+	        		handleChange= {this.handleChange}
+	        		updategainWasClicked= {this.state.gainClicker}
+	        		changegain = {this.handleChangegain}
+	        		update = {this.state.update}
+	        		handleUpdate = {this.handleUpdate}
+			        /> 
+			    	
+			    </Col>
+
+		    </Row>
+
+		    <Row>
+
+					<BuyNew onChange= {this.handleChange}
+			        		updatePortfolio = {this.handleBuyNewSubmit}
+			        		nameInput = {this.state.nameInput}
+			        		gainInput = {this.state.gainInput}
+			        		qtyInput = {this.state.qtyInput}
+			        />
+
+			        
+
+			   
+	        </Row>
+	       	
+	    </Grid>
       </div>
     );
   }

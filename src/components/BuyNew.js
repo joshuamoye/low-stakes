@@ -10,9 +10,9 @@ render(){
 			<input
 				className= 'ListItem' 	
 				type= 'text' 
-		    	name= 'tickerInput' 
+		    	name= 'nameInput' 
 		        placeholder= 'Enter a company name' 
-		       	value={this.props.tickerInput}
+		       	value={this.props.nameInput}
 		       	onChange= {this.props.onChange}
 		    />
 
@@ -20,18 +20,9 @@ render(){
 		    <input
 				className= 'ListItem' 	
 				type= 'number' 
-		    	name= 'priceInput' 
-		        placeholder= 'Enter a price' 
-		        value={this.props.priceInput}
-		        onChange= {this.props.onChange}
-		    />
-
-		    <input
-				className= 'ListItem' 	
-				type= 'number' 
-		    	name= 'qtyInput' 
-		        placeholder= 'Enter a quantity' 
-		        value={this.props.qtyInput}
+		    	name= 'gainInput' 
+		        placeholder= 'Enter a gain' 
+		        value={this.props.gainInput}
 		        onChange= {this.props.onChange}
 		    />
 

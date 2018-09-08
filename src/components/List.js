@@ -1,75 +1,69 @@
 import React, { Component } from 'react';
+import {Grid, Row, Col} from 'react-bootstrap'
+import {StickyContainer, Sticky} from 'react-sticky'
+
 
 class List extends Component{
 
 
 	render(){ 
-		var stock = this.props.stock.map((item,index)=>
-			<tr key= {index}>
+		var portfolio = this.props.portfolio.map((item,index)=> /* need another key*/
+		<div key = {index}>
 
-					<td>
-						{item.ticker}
-					</td>
+			<Grid>
 
+			  <Row key = {index} className="show-grid">
 
-					<td>
-						{item.price}
-					</td>
+			    <Col lg={4}>
+				      {item.name}
+			    </Col>
 
-
-					<td>
-						{item.newPrice}
-					</td>
+			    <Col lg={4}>
+				      {item.gain}%
+			    </Col>
 
 
-					<td>
-						{this.props.update === index ?
-						<div>
-						<input type="number"
-								name= "newPrice"
-								onChange= {this.props.handleChange}
-								 />
-						<input type="submit" 
-						onClick= {(e)=>this.props.handleUpdate(e,item.ticker)}
-						/>
-						</div>
-						:
-						<input type = 'submit'
-							value= "update price"
-							// onChange= {this.props.handleChange}
-							onClick= {(e)=>this.props.changePrice(e,index)}
-						/>
-						}
-						
-					</td>
 
-			</tr>)
+			  </Row>
+
+
+			  <Row className="show-grid">
+
+			    <Col lg={1} className= 'row-buttons'>
+			      Edit
+			    </Col>
+
+			    <Col lg={1}>
+			      Duplicate
+			    </Col>
+
+			    <Col lg={1}>
+			      Delete
+			    </Col>
+
+			  </Row>
+
+			  
+			  
+			</Grid>
+		</div>
+		)
 
 
 
 		return(
-			<div >	
+			<div className= 'List'>	
 				<form>
-				<table>
-					<tbody>
-			       		<tr>
-			       		
-				       		<th>Ticker</th>
-				       		<th>Cost</th>
-				       		<th>Current Price</th>
+					
+						
+				       		
+				       		{portfolio}
+				   
 
-			       		</tr>
-
-			       		
-			       		{stock}
-			   
-
-			       </tbody>
-      			</table>
+	      			
       			</form>	
-				
-			</div>
-			)
+      		</div>				
+		)
 	}
 }
 

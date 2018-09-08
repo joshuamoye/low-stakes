@@ -28,7 +28,7 @@ class Main extends Component{
 						</label>
 	        		</form>
         		</header>
-        		<h1 className = 'Cash'> Cash: {this.props.account}</h1>
+        		<h1 className = 'Bash'> Cash: {this.props.account}</h1>
         		
         	</div>
         

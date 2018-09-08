@@ -1,5 +1,6 @@
-.App {
-  text-align: center;
+.App, .show-grid {
+  text-align: left;
+  padding: 20px;
 }
 
 .App-logo {
@@ -22,13 +23,22 @@
   font-size: large;
 }
 
-.BuyNew{
+.List{
   float: center;
+  text-align: center;
 }
 
-.Cash {
+.Nav{
+  float: left;
+}
+
+.Bash {
   float: right;
-  color: green;
+  color: blue;
+}
+
+.row-buttons{
+  text-align: center;
 }
 
 @keyframes App-logo-spin {
